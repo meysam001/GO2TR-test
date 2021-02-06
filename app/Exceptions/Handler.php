@@ -2,7 +2,11 @@
 
 namespace App\Exceptions;
 
+use http\Exception;
+use HttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -36,5 +40,30 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($exception instanceof AccessDeniedHttpException) {
+            return response()->json([
+                'message' =>'Forbidden',
+                'code' => '400',
+            ], 400);
+        }
+        elseif ($exception instanceof NotFoundHttpException
+        || $exception instanceof HttpException) {
+            return response()->json([
+                'message' =>'Resource Not Found',
+                'code' => '404',
+            ], 404);
+        }
+        else{
+            return response()->json(
+                [
+                    'message' => 'Unexpected Error '.$exception->getMessage(),
+                ], 422
+            );
+        }
+
     }
 }

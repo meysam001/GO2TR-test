@@ -1,0 +1,187 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Go2TR Back-end Test API",
+        "contact": {
+            "name": "Meysam Mahmoudi",
+            "email": "meysam0011212@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/admin/photo": {
+            "get": {
+                "tags": [
+                    "photo"
+                ],
+                "summary": "Get all photos",
+                "operationId": "/admin/photo/index",
+                "responses": {
+                    "200": {
+                        "description": "Returns records",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "photo"
+                ],
+                "summary": "upload a new photo",
+                "operationId": "/admin/photo/store",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "file",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "file": {
+                                        "description": "photo",
+                                        "type": "string",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    },
+                                    "description": {
+                                        "description": "photo description",
+                                        "type": "string",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "resource created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/photo/{id}": {
+            "get": {
+                "tags": [
+                    "photo"
+                ],
+                "summary": "Get single photo",
+                "operationId": "/admin/photo/show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "photo id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns records",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "photo"
+                ],
+                "summary": "upload a photo",
+                "operationId": "/admin/photo/update",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "file",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "file": {
+                                        "description": "photo",
+                                        "type": "string",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    },
+                                    "description": {
+                                        "description": "photo description",
+                                        "type": "string",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "resource updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "photo"
+                ],
+                "summary": "delete a photo",
+                "operationId": "/admin/photo/destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "photo id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "resource deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

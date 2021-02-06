@@ -13,10 +13,19 @@ use Intervention\Image\ImageManagerStatic as Image;
 class PhotoController extends Controller
 {
     private $photoModel;
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *     path="/admin/photo",
+     *     operationId="/admin/photo/index",
+     *     summary="Get all photos",
+     *     tags={"photo"},
+     *     @OA\Response(
+     *         response="200",
+     *         description="Returns records",
+     *         @OA\JsonContent()
+     *     )
+     * )
      */
     public function index()
     {
@@ -26,10 +35,26 @@ class PhotoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @OA\Post(
+     *     path="/admin/photo",
+     *     operationId="/admin/photo/store",
+     *     summary="upload a new photo",
+     *     tags={"photo"},
+     *     @OA\RequestBody(
+     *          @OA\MediaType(mediaType="multipart/form-data",
+     *              @OA\Schema(
+     *                  @OA\Property(property="file", type="string", description="photo", @OA\Items(type="string", format="binary")),
+     *                  @OA\Property(property="description", type="string", description="photo description", @OA\Items(type="string")),
+     *                  required={"file", "description"}
+     *             )
+     *         )
+     *      ),
+     *     @OA\Response(
+     *         response="201",
+     *         description="resource created successfully",
+     *         @OA\JsonContent()
+     *     )
+     * )
      */
     public function store(Request $request)
     {
@@ -57,10 +82,20 @@ class PhotoController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *     path="/admin/photo/{id}",
+     *     operationId="/admin/photo/show",
+     *     summary="Get single photo",
+     *     tags={"photo"},
+     *      @OA\Parameter(
+     *          name="id", required=true, in="path", description="photo id", @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Returns records",
+     *         @OA\JsonContent()
+     *     )
+     * )
      */
     public function show($id)
     {
@@ -69,11 +104,26 @@ class PhotoController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @OA\Put(
+     *     path="/admin/photo/{id}",
+     *     operationId="/admin/photo/update",
+     *     summary="upload a photo",
+     *     tags={"photo"},
+     *     @OA\RequestBody(
+     *          @OA\MediaType(mediaType="multipart/form-data",
+     *              @OA\Schema(
+     *                  @OA\Property(property="file", type="string", description="photo", @OA\Items(type="string", format="binary")),
+     *                  @OA\Property(property="description", type="string", description="photo description", @OA\Items(type="string")),
+     *                  required={"file", "description"}
+     *             )
+     *         )
+     *      ),
+     *     @OA\Response(
+     *         response="204",
+     *         description="resource updated successfully",
+     *         @OA\JsonContent()
+     *     )
+     * )
      */
     public function update(Request $request, $id)
     {
@@ -99,10 +149,20 @@ class PhotoController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @OA\Delete(
+     *     path="/admin/photo/{id}",
+     *     operationId="/admin/photo/destroy",
+     *     summary="delete a photo",
+     *     tags={"photo"},
+     *      @OA\Parameter(
+     *          name="id", required=true, in="path", description="photo id", @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="resource deleted successfully",
+     *         @OA\JsonContent()
+     *     )
+     * )
      */
     public function destroy($id)
     {

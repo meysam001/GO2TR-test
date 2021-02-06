@@ -69,4 +69,6 @@ return [
         public_path('storage') => storage_path('app/public'),
     ],
 
+    'thumbSuffix' => env('THUMB_SUFFIX', '_thumb'),
+
 ];

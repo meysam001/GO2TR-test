@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\GenerateThumbnail;
 use Illuminate\Http\Request;
 use App\Models\Photo;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class PhotoController extends Controller
 {
+    private $photoModel;
     /**
      * Display a listing of the resource.
      *
@@ -39,13 +42,16 @@ class PhotoController extends Controller
         $path = $file->store('public');
         list($width, $height) = getimagesize($file->path());
 
-        Photo::create([
+        $photo = Photo::create([
             'path' => $path,
             'width' => $width,
             'height' => $height,
             'description' => $request->description,
             'url' => Storage::url($path),
         ]);
+
+        // dispatch job to generate thumbnail in background
+        GenerateThumbnail::dispatch($photo);
 
         return $this->response(['message' => 'resource created successfully'], 201);
     }

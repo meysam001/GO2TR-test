@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
 use Illuminate\Http\Request;
+use App\Models\Post;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
@@ -14,7 +17,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $post = Post::all();
+
+        return new PostResource($post);
     }
 
     /**
@@ -25,7 +30,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), $this->rules());
+        if ($validator->fails()) {
+            return $this->response(['error' => 'Input data is invalid'], 400);
+        }
+
+        Post::create($request->all());
+
+        return $this->response(['message' => 'Action completed successfully'], 201);
     }
 
     /**
@@ -36,7 +48,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        return new PostResource($post);
     }
 
     /**
@@ -48,7 +62,15 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), $this->rules());
+        if ($validator->fails()) {
+            return $this->response(['error' => 'Input data is invalid'], 400);
+        }
+
+        $post = Post::findOrFail($id);
+        $post->update($request->all());
+
+        return $this->response(['message' => 'Action completed successfully'], 204);
     }
 
     /**
@@ -59,6 +81,31 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->delete();
+
+        return $this->response(['message' => 'Action completed successfully'], 200);
+    }
+
+    public function activePost(Request $request, $id)
+    {
+        $validator = Validator::make($request->only('active'), ['active' => 'required|boolean']);
+        if ($validator->fails()) {
+            return $this->response(['error' => $validator->errors()], 400);
+        }
+
+        $post = Post::findOrFail($id);
+        $post->update($request->only('active'));
+
+        return $this->response(['message' => 'Action completed successfully'], 204);
+    }
+
+    private function rules()
+    {
+        return [
+          'title' => 'required|max:255',
+          'content' => 'required',
+          'active' => 'required|boolean',
+        ];
     }
 }

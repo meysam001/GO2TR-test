@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Photo;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class PhotoController extends Controller
 {
@@ -14,7 +17,9 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        //
+        $post = Photo::all();
+
+        return $this->response(['data' => $post]);
     }
 
     /**
@@ -25,7 +30,24 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), $this->rules());
+        if ($validator->fails()) {
+            return $this->response(['error' => $validator->errors()], 400);
+        }
+
+        $file = $request->file('file');
+        $path = $file->store('public');
+        list($width, $height) = getimagesize($file->path());
+
+        Photo::create([
+            'path' => $path,
+            'width' => $width,
+            'height' => $height,
+            'description' => $request->description,
+            'url' => Storage::url($path),
+        ]);
+
+        return $this->response(['message' => 'resource created successfully'], 201);
     }
 
     /**
@@ -36,7 +58,8 @@ class PhotoController extends Controller
      */
     public function show($id)
     {
-        //
+        $photo = Photo::findOrFail($id);
+        return $this->response(['data' => $photo]);
     }
 
     /**
@@ -48,7 +71,25 @@ class PhotoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), $this->rules());
+        if ($validator->fails()) {
+            return $this->response(['error' => $validator->errors()], 400);
+        }
+
+        $file = $request->file('file');
+        $path = $file->store('public');
+        list($width, $height) = getimagesize($file->path());
+
+        $photo = Photo::findOrFail($id);
+        $photo->update([
+            'path' => $path,
+            'width' => $width,
+            'height' => $height,
+            'description' => $request->description,
+            'url' => Storage::url($path),
+        ]);
+
+        return $this->response(['message' => 'resource updated successfully'], 204);
     }
 
     /**
@@ -59,6 +100,17 @@ class PhotoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Photo::findOrFail($id);
+        $post->delete();
+
+        return $this->response(['message' => 'resource deleted successfully'], 200);
+    }
+
+    private function rules()
+    {
+        return [
+            'file' => 'required|mimes:jpg,png|max:50000',
+            'description' => 'required|max:255',
+        ];
     }
 }

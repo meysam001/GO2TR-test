@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\Admin\PhotoController;
-use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\PhotoController as AdminPhotoController;
+use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth:api'], function() {
-    Route::apiResource('post', PostController::class);
-    Route::patch('post/{id}/active', [PostController::class, 'activePost']);
-    Route::apiResource('photo', PhotoController::class);
+    Route::apiResource('post', AdminPostController::class);
+    Route::patch('post/{id}/active', [AdminPostController::class, 'activePost']);
+    Route::apiResource('photo', AdminPhotoController::class);
 });
+
+Route::get('content', [HomeController::class, 'index']);

@@ -23,7 +23,7 @@ class UserTableSeeder extends Seeder
             'email' => 'meysam0011212@gmail.com',
             'email_verified_at' => \Carbon\Carbon::now(),
             'password' => bcrypt('go2tr123456'),
-            'api_token' => Str::random(80),
+            'api_token' => 'cK2gN1hvTwbklloQNywSn5wtBno7dj5gh3Wnba9Pbldohpbj2zb9Rqt4W2u4Xb7GV5k6quia4omTRqf8',
         ]);
     }
 }

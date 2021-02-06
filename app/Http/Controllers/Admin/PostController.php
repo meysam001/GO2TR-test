@@ -19,7 +19,7 @@ class PostController extends Controller
     {
         $post = Post::all();
 
-        return new PostResource($post);
+        return $this->response(['data' => $post]);
     }
 
     /**
@@ -49,8 +49,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
-
-        return new PostResource($post);
+        return $this->response(['data' => $post]);
     }
 
     /**

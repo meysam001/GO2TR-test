@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Utils\GenerateList;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
@@ -17,7 +18,7 @@ class PostResource extends JsonResource
         return [
             'title' => $this->title,
             'content' => $this->transformed_content,
-            'list' => '',
+            'list' => GenerateList::handle($this->content),
         ];
     }
 }

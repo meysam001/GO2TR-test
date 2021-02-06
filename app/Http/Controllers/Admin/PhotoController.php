@@ -24,7 +24,10 @@ class PhotoController extends Controller
      *         response="200",
      *         description="Returns records",
      *         @OA\JsonContent()
-     *     )
+     *     ),
+     *     security={
+     *         {"bearer": {}}
+     *     }
      * )
      */
     public function index()
@@ -53,7 +56,10 @@ class PhotoController extends Controller
      *         response="201",
      *         description="resource created successfully",
      *         @OA\JsonContent()
-     *     )
+     *     ),
+     *     security={
+     *         {"bearer": {}}
+     *     }
      * )
      */
     public function store(Request $request)
@@ -94,7 +100,10 @@ class PhotoController extends Controller
      *         response="200",
      *         description="Returns records",
      *         @OA\JsonContent()
-     *     )
+     *     ),
+     *     security={
+     *         {"bearer": {}}
+     *     }
      * )
      */
     public function show($id)
@@ -125,7 +134,10 @@ class PhotoController extends Controller
      *         response="204",
      *         description="resource updated successfully",
      *         @OA\JsonContent()
-     *     )
+     *     ),
+     *     security={
+     *         {"bearer": {}}
+     *     }
      * )
      */
     public function update(Request $request, $id)
@@ -164,7 +176,10 @@ class PhotoController extends Controller
      *         response="200",
      *         description="resource deleted successfully",
      *         @OA\JsonContent()
-     *     )
+     *     ),
+     *     security={
+     *         {"bearer": {}}
+     *     }
      * )
      */
     public function destroy($id)

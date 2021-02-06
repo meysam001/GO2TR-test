@@ -21,7 +21,10 @@ class PostController extends Controller
      *         response="200",
      *         description="Returns records",
      *         @OA\JsonContent()
-     *     )
+     *     ),
+     *     security={
+     *         {"bearer": {}}
+     *     }
      * )
      */
     public function index()
@@ -51,7 +54,10 @@ class PostController extends Controller
      *         response="201",
      *         description="Add new post",
      *         @OA\JsonContent()
-     *     )
+     *     ),
+     *     security={
+     *         {"bearer": {}}
+     *     }
      * )
      */
     public function store(Request $request)
@@ -71,7 +77,7 @@ class PostController extends Controller
      *     path="/api/admin/post/{id}",
      *     operationId="/api/admin/post/show",
      *     summary="Get single post",
-     *     tags={"photo"},
+     *     tags={"post"},
      *      @OA\Parameter(
      *          name="id", required=true, in="path", description="photo id", @OA\Schema(type="string")
      *     ),
@@ -79,7 +85,10 @@ class PostController extends Controller
      *         response="200",
      *         description="Returns single pos",
      *         @OA\JsonContent()
-     *     )
+     *     ),
+     *     security={
+     *         {"bearer": {}}
+     *     }
      * )
      */
     public function show($id)
@@ -111,7 +120,10 @@ class PostController extends Controller
      *         response="201",
      *         description="Add new post",
      *         @OA\JsonContent()
-     *     )
+     *     ),
+     *     security={
+     *         {"bearer": {}}
+     *     }
      * )
      */
     public function update(Request $request, $id)
@@ -140,7 +152,10 @@ class PostController extends Controller
      *         response="200",
      *         description="resource deleted successfully",
      *         @OA\JsonContent()
-     *     )
+     *     ),
+     *     security={
+     *         {"bearer": {}}
+     *     }
      * )
      */
     public function destroy($id)
@@ -172,7 +187,10 @@ class PostController extends Controller
      *         response="201",
      *         description="Add new post",
      *         @OA\JsonContent()
-     *     )
+     *     ),
+     *     security={
+     *         {"bearer": {}}
+     *     }
      * )
      */
     public function activePost(Request $request, $id)

@@ -19,6 +19,7 @@
     </coverage>
     <php>
         <server name="APP_ENV" value="testing"/>
+        <server name="API_TOKEN" value="Bearer cK2gN1hvTwbklloQNywSn5wtBno7dj5gh3Wnba9Pbldohpbj2zb9Rqt4W2u4Xb7GV5k6quia4omTRqf8"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
         <server name="CACHE_DRIVER" value="array"/>
         <!-- <server name="DB_CONNECTION" value="sqlite"/> -->

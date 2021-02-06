@@ -16,8 +16,8 @@ class PhotoController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/admin/photo",
-     *     operationId="/admin/photo/index",
+     *     path="/api/admin/photo",
+     *     operationId="/api/admin/photo/index",
      *     summary="Get all photos",
      *     tags={"photo"},
      *     @OA\Response(
@@ -36,8 +36,8 @@ class PhotoController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/admin/photo",
-     *     operationId="/admin/photo/store",
+     *     path="/api/admin/photo",
+     *     operationId="/api/admin/photo/store",
      *     summary="upload a new photo",
      *     tags={"photo"},
      *     @OA\RequestBody(
@@ -83,8 +83,8 @@ class PhotoController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/admin/photo/{id}",
-     *     operationId="/admin/photo/show",
+     *     path="/api/admin/photo/{id}",
+     *     operationId="/api/admin/photo/show",
      *     summary="Get single photo",
      *     tags={"photo"},
      *      @OA\Parameter(
@@ -105,8 +105,8 @@ class PhotoController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/admin/photo/{id}",
-     *     operationId="/admin/photo/update",
+     *     path="/api/admin/photo/{id}",
+     *     operationId="/api/admin/photo/update",
      *     summary="upload a photo",
      *     tags={"photo"},
      *      @OA\Parameter(
@@ -115,7 +115,7 @@ class PhotoController extends Controller
      *     @OA\RequestBody(
      *          @OA\MediaType(mediaType="multipart/form-data",
      *              @OA\Schema(
-     *                  @OA\Property(property="file", type="string", description="photo", @OA\Items(type="string", format="binary")),
+     *                  @OA\Property(property="file", type="string", description="photo path", @OA\Items(type="string", format="binary")),
      *                  @OA\Property(property="description", type="string", description="photo description", @OA\Items(type="string")),
      *                  required={"file", "description"}
      *             )
@@ -153,8 +153,8 @@ class PhotoController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/admin/photo/{id}",
-     *     operationId="/admin/photo/destroy",
+     *     path="/api/admin/photo/{id}",
+     *     operationId="/api/admin/photo/destroy",
      *     summary="delete a photo",
      *     tags={"photo"},
      *      @OA\Parameter(

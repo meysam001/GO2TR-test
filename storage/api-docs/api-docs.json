@@ -8,14 +8,20 @@
         },
         "version": "1.0"
     },
+    "servers": [
+        {
+            "url": "http://localhost/GO2TR/public",
+            "description": "L5 Swagger OpenApi dynamic host server"
+        }
+    ],
     "paths": {
-        "/admin/photo": {
+        "/api/admin/photo": {
             "get": {
                 "tags": [
                     "photo"
                 ],
                 "summary": "Get all photos",
-                "operationId": "/admin/photo/index",
+                "operationId": "/api/admin/photo/index",
                 "responses": {
                     "200": {
                         "description": "Returns records",
@@ -32,7 +38,7 @@
                     "photo"
                 ],
                 "summary": "upload a new photo",
-                "operationId": "/admin/photo/store",
+                "operationId": "/api/admin/photo/store",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -75,13 +81,13 @@
                 }
             }
         },
-        "/admin/photo/{id}": {
+        "/api/admin/photo/{id}": {
             "get": {
                 "tags": [
                     "photo"
                 ],
                 "summary": "Get single photo",
-                "operationId": "/admin/photo/show",
+                "operationId": "/api/admin/photo/show",
                 "parameters": [
                     {
                         "name": "id",
@@ -109,7 +115,7 @@
                     "photo"
                 ],
                 "summary": "upload a photo",
-                "operationId": "/admin/photo/update",
+                "operationId": "/api/admin/photo/update",
                 "parameters": [
                     {
                         "name": "id",
@@ -131,7 +137,7 @@
                                 ],
                                 "properties": {
                                     "file": {
-                                        "description": "photo",
+                                        "description": "photo path",
                                         "type": "string",
                                         "items": {
                                             "type": "string",
@@ -167,7 +173,7 @@
                     "photo"
                 ],
                 "summary": "delete a photo",
-                "operationId": "/admin/photo/destroy",
+                "operationId": "/api/admin/photo/destroy",
                 "parameters": [
                     {
                         "name": "id",
@@ -191,13 +197,13 @@
                 }
             }
         },
-        "/admin/post": {
+        "/api/admin/post": {
             "get": {
                 "tags": [
                     "post"
                 ],
                 "summary": "Get all posts",
-                "operationId": "/admin/post/index",
+                "operationId": "/api/admin/post/index",
                 "responses": {
                     "200": {
                         "description": "Returns records",
@@ -214,7 +220,7 @@
                     "post"
                 ],
                 "summary": "insert a new post",
-                "operationId": "/admin/post/store",
+                "operationId": "/api/admin/post/store",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -264,13 +270,13 @@
                 }
             }
         },
-        "/admin/post/{id}": {
+        "/api/admin/post/{id}": {
             "get": {
                 "tags": [
                     "photo"
                 ],
                 "summary": "Get single post",
-                "operationId": "/admin/post/show",
+                "operationId": "/api/admin/post/show",
                 "parameters": [
                     {
                         "name": "id",
@@ -298,7 +304,7 @@
                     "post"
                 ],
                 "summary": "update a single post",
-                "operationId": "/admin/post/update",
+                "operationId": "/api/admin/post/update",
                 "parameters": [
                     {
                         "name": "id",
@@ -362,7 +368,7 @@
                     "post"
                 ],
                 "summary": "delete a post",
-                "operationId": "/admin/post/destroy",
+                "operationId": "/api/admin/post/destroy",
                 "parameters": [
                     {
                         "name": "id",
@@ -386,13 +392,13 @@
                 }
             }
         },
-        "/admin/post/{id}/active": {
+        "/api/admin/post/{id}/active": {
             "patch": {
                 "tags": [
                     "post"
                 ],
                 "summary": "active/deactive a post",
-                "operationId": "/admin/post/activePost",
+                "operationId": "/api/admin/post/activePost",
                 "parameters": [
                     {
                         "name": "id",
@@ -428,6 +434,25 @@
                 "responses": {
                     "201": {
                         "description": "Add new post",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/home": {
+            "get": {
+                "tags": [
+                    "content"
+                ],
+                "summary": "show all posts",
+                "operationId": "home/content",
+                "responses": {
+                    "200": {
+                        "description": "Returns records",
                         "content": {
                             "application/json": {
                                 "schema": {}

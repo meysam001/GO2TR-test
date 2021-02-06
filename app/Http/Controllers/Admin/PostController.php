@@ -13,8 +13,8 @@ class PostController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/admin/post",
-     *     operationId="/admin/post/index",
+     *     path="/api/admin/post",
+     *     operationId="/api/admin/post/index",
      *     summary="Get all posts",
      *     tags={"post"},
      *     @OA\Response(
@@ -33,8 +33,8 @@ class PostController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/admin/post",
-     *     operationId="/admin/post/store",
+     *     path="/api/admin/post",
+     *     operationId="/api/admin/post/store",
      *     summary="insert a new post",
      *     tags={"post"},
      *     @OA\RequestBody(
@@ -68,8 +68,8 @@ class PostController extends Controller
 
     /**
      * @OA\Get(
-     *     path="/admin/post/{id}",
-     *     operationId="/admin/post/show",
+     *     path="/api/admin/post/{id}",
+     *     operationId="/api/admin/post/show",
      *     summary="Get single post",
      *     tags={"photo"},
      *      @OA\Parameter(
@@ -90,8 +90,8 @@ class PostController extends Controller
 
     /**
      * @OA\Put(
-     *     path="/admin/post/{id}",
-     *     operationId="/admin/post/update",
+     *     path="/api/admin/post/{id}",
+     *     operationId="/api/admin/post/update",
      *     summary="update a single post",
      *     tags={"post"},
      *      @OA\Parameter(
@@ -129,8 +129,8 @@ class PostController extends Controller
 
     /**
      * @OA\Delete(
-     *     path="/admin/post/{id}",
-     *     operationId="/admin/post/destroy",
+     *     path="/api/admin/post/{id}",
+     *     operationId="/api/admin/post/destroy",
      *     summary="delete a post",
      *     tags={"post"},
      *      @OA\Parameter(
@@ -153,8 +153,8 @@ class PostController extends Controller
 
     /**
      * @OA\PATCH(
-     *     path="/admin/post/{id}/active",
-     *     operationId="/admin/post/activePost",
+     *     path="/api/admin/post/{id}/active",
+     *     operationId="/api/admin/post/activePost",
      *     summary="active/deactive a post",
      *     tags={"post"},
      *      @OA\Parameter(

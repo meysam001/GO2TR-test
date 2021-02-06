@@ -27,4 +27,4 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:api'], function() {
     Route::apiResource('photo', AdminPhotoController::class);
 });
 
-Route::get('content', [HomeController::class, 'index']);
+Route::get('home', [HomeController::class, 'index']);

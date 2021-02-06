@@ -20,7 +20,7 @@ class HomeControllerTest extends TestCase
 
     public function testIndex()
     {
-        $response = $this->get('/api/content');
+        $response = $this->get('/api/home');
         $response->assertStatus(200);
     }
 }

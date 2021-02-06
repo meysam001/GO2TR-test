@@ -21,6 +21,13 @@ class Controller extends BaseController
      *   )
      * )
      */
+    /**
+     *  @OA\Server(
+     *      url=L5_SWAGGER_CONST_HOST,
+     *      description="L5 Swagger OpenApi dynamic host server"
+     *  )
+     */
+
     public function response(array $data, $httpStatus = 200) {
         return response()->json($data, $httpStatus);
     }

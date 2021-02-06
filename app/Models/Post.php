@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Utils\TransformContent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,12 +11,9 @@ class Post extends Model
     use HasFactory;
     protected $fillable = ['title', 'content', 'active'];
 
-    public function getParsedContentAttribute()
+    public function getTransformedContentAttribute()
     {
-        $dom = new \domDocument;
-        $dom->loadHTML($this->content);
-
-        return $dom->saveHTML();
+        return TransformContent::handle($this->content);
     }
 
     /**

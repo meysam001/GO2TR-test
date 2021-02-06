@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Utils\Utility;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
@@ -17,7 +16,7 @@ class PostResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'content' => Utility::transformShortCodes($this->content),
+            'content' => $this->transformed_content,
             'list' => '',
         ];
     }

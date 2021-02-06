@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $post = Post::all();
+        $post = Post::active()->get();
 
         return PostResource::Collection($post);
     }

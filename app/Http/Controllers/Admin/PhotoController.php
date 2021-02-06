@@ -109,6 +109,9 @@ class PhotoController extends Controller
      *     operationId="/admin/photo/update",
      *     summary="upload a photo",
      *     tags={"photo"},
+     *      @OA\Parameter(
+     *          name="id", required=true, description="photo id", in="path", @OA\Schema(type="string")
+     *     ),
      *     @OA\RequestBody(
      *          @OA\MediaType(mediaType="multipart/form-data",
      *              @OA\Schema(

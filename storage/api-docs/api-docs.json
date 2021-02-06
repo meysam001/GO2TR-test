@@ -110,6 +110,17 @@
                 ],
                 "summary": "upload a photo",
                 "operationId": "/admin/photo/update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "photo id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -171,6 +182,252 @@
                 "responses": {
                     "200": {
                         "description": "resource deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/post": {
+            "get": {
+                "tags": [
+                    "post"
+                ],
+                "summary": "Get all posts",
+                "operationId": "/admin/post/index",
+                "responses": {
+                    "200": {
+                        "description": "Returns records",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "post"
+                ],
+                "summary": "insert a new post",
+                "operationId": "/admin/post/store",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "content",
+                                    "active"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "collectionFormat": "multi"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "collectionFormat": "multi"
+                                    },
+                                    "active": {
+                                        "type": "integer",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "collectionFormat": "multi"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Add new post",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/post/{id}": {
+            "get": {
+                "tags": [
+                    "photo"
+                ],
+                "summary": "Get single post",
+                "operationId": "/admin/post/show",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "photo id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns single pos",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "post"
+                ],
+                "summary": "update a single post",
+                "operationId": "/admin/post/update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "content",
+                                    "active"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "collectionFormat": "multi"
+                                    },
+                                    "content": {
+                                        "type": "string",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "collectionFormat": "multi"
+                                    },
+                                    "active": {
+                                        "type": "integer",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "collectionFormat": "multi"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Add new post",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "post"
+                ],
+                "summary": "delete a post",
+                "operationId": "/admin/post/destroy",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "post id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "resource deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/post/{id}/active": {
+            "patch": {
+                "tags": [
+                    "post"
+                ],
+                "summary": "active/deactive a post",
+                "operationId": "/admin/post/activePost",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "active"
+                                ],
+                                "properties": {
+                                    "active": {
+                                        "description": "0,1",
+                                        "type": "integer",
+                                        "items": {
+                                            "type": "integer"
+                                        },
+                                        "collectionFormat": "multi"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Add new post",
                         "content": {
                             "application/json": {
                                 "schema": {}

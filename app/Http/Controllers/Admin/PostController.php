@@ -10,10 +10,19 @@ use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *     path="/admin/post",
+     *     operationId="/admin/post/index",
+     *     summary="Get all posts",
+     *     tags={"post"},
+     *     @OA\Response(
+     *         response="200",
+     *         description="Returns records",
+     *         @OA\JsonContent()
+     *     )
+     * )
      */
     public function index()
     {
@@ -23,10 +32,27 @@ class PostController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @OA\Post(
+     *     path="/admin/post",
+     *     operationId="/admin/post/store",
+     *     summary="insert a new post",
+     *     tags={"post"},
+     *     @OA\RequestBody(
+     *          @OA\MediaType(mediaType="multipart/form-data",
+     *              @OA\Schema(
+     *                  @OA\Property(property="title", type="string", collectionFormat="multi", @OA\Items(type="string")),
+     *                  @OA\Property(property="content", type="string", collectionFormat="multi", @OA\Items(type="string")),
+     *                  @OA\Property(property="active", type="integer", collectionFormat="multi", @OA\Items(type="integer")),
+     *                  required={"title", "content", "active"}
+     *             )
+     *         )
+     *      ),
+     *     @OA\Response(
+     *         response="201",
+     *         description="Add new post",
+     *         @OA\JsonContent()
+     *     )
+     * )
      */
     public function store(Request $request)
     {
@@ -41,10 +67,20 @@ class PostController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @OA\Get(
+     *     path="/admin/post/{id}",
+     *     operationId="/admin/post/show",
+     *     summary="Get single post",
+     *     tags={"photo"},
+     *      @OA\Parameter(
+     *          name="id", required=true, in="path", description="photo id", @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="Returns single pos",
+     *         @OA\JsonContent()
+     *     )
+     * )
      */
     public function show($id)
     {
@@ -53,11 +89,30 @@ class PostController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @OA\Put(
+     *     path="/admin/post/{id}",
+     *     operationId="/admin/post/update",
+     *     summary="update a single post",
+     *     tags={"post"},
+     *      @OA\Parameter(
+     *          name="id", required=true, in="path", @OA\Schema(type="string")
+     *     ),
+     *     @OA\RequestBody(
+     *          @OA\MediaType(mediaType="multipart/form-data",
+     *              @OA\Schema(
+     *                  @OA\Property(property="title", type="string", collectionFormat="multi", @OA\Items(type="string")),
+     *                  @OA\Property(property="content", type="string", collectionFormat="multi", @OA\Items(type="string")),
+     *                  @OA\Property(property="active", type="integer", collectionFormat="multi", @OA\Items(type="integer")),
+     *                  required={"title", "content", "active"}
+     *             )
+     *         )
+     *      ),
+     *     @OA\Response(
+     *         response="201",
+     *         description="Add new post",
+     *         @OA\JsonContent()
+     *     )
+     * )
      */
     public function update(Request $request, $id)
     {
@@ -73,10 +128,20 @@ class PostController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @OA\Delete(
+     *     path="/admin/post/{id}",
+     *     operationId="/admin/post/destroy",
+     *     summary="delete a post",
+     *     tags={"post"},
+     *      @OA\Parameter(
+     *          name="id", required=true, in="path", description="post id", @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response="200",
+     *         description="resource deleted successfully",
+     *         @OA\JsonContent()
+     *     )
+     * )
      */
     public function destroy($id)
     {
@@ -86,6 +151,30 @@ class PostController extends Controller
         return $this->response(['message' => 'Action completed successfully'], 200);
     }
 
+    /**
+     * @OA\PATCH(
+     *     path="/admin/post/{id}/active",
+     *     operationId="/admin/post/activePost",
+     *     summary="active/deactive a post",
+     *     tags={"post"},
+     *      @OA\Parameter(
+     *          name="id", required=true, in="path", @OA\Schema(type="string")
+     *     ),
+     *     @OA\RequestBody(
+     *          @OA\MediaType(mediaType="multipart/form-data",
+     *              @OA\Schema(
+     *                  @OA\Property(property="active", type="integer", description="0,1", collectionFormat="multi", @OA\Items(type="integer")),
+     *                  required={"active"}
+     *             )
+     *         )
+     *      ),
+     *     @OA\Response(
+     *         response="201",
+     *         description="Add new post",
+     *         @OA\JsonContent()
+     *     )
+     * )
+     */
     public function activePost(Request $request, $id)
     {
         $validator = Validator::make($request->only('active'), ['active' => 'required|boolean']);
